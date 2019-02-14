@@ -413,6 +413,8 @@
         </div>
     </footer><!-- End footer-->
     <div id="toTop">Back to Top</div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     <!-- MEGAMENU -->
     <script src="/js/jquery.easing.js"></script>
     <script src="/js/megamenu.js"></script>
@@ -428,5 +430,6 @@
     <script src="/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
     <script type="text/javascript" src="/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
     <script src="/js/revolutio-slider-func.js"></script>
+    @RenderSection("scripts",required: false)
 </body>
 </html>

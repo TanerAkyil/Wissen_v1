@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,6 +11,21 @@ namespace Wissen.Controllers
     {
         public ActionResult Index()
         {
+            return View();
+        }
+        public ActionResult DenemeForm()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult DenemeForm(Wissen.Models.DenemeForm model)
+        {
+            if (ModelState.IsValid)
+            {
+                //1000:Mail gönder
+                ViewBag.Message = "Mail başarıyla gönderildi.";
+                return View();
+            }
             return View();
         }
 
@@ -29,6 +45,41 @@ namespace Wissen.Controllers
         [HttpPost]
         public ActionResult Contact(string firstName,string lastName,string email,string phone,string department,string message)
         {
+            firstName = firstName.Trim();
+            lastName = lastName.Trim();
+           
+            if (firstName == "")
+            {
+               
+                ViewBag.Message = "Ad alanı gereklidir.";
+                ViewBag.IsError = true;
+                return View();
+            }
+            if (firstName.Length > 50)
+            {
+                ViewBag.Message = "Ad alanı 50 karakterden uzun olamaz";
+                ViewBag.IsError = true;
+                return View();
+            }
+            if (lastName == "")
+            {
+                
+                ViewBag.Message = "Soyad alanı gereklidir";
+                ViewBag.IsError = true;
+                return View();
+            }
+
+            Regex regex = new Regex(@"^5(0[5-7]|[3-5]\d) ?\d{3} ?\d{4}$");//
+            Match match = regex.Match(phone);
+            if (match.Success == false)
+            {
+                ViewBag.Message = "Telefon 5XX XXX XXXX biçiminde olmalıdır.";
+                ViewBag.IsError = true;
+                return View();
+            }
+
+            //TODO Mail Gönderme İşlemi
+
             System.Net.Mail.MailMessage mailMessage = new System.Net.Mail.MailMessage();
             mailMessage.From = new System.Net.Mail.MailAddress("tanerakyil@gmail.com", "tano");
             mailMessage.Subject = "İletişim Formu: " + firstName+ " " + lastName;
@@ -54,5 +105,6 @@ namespace Wissen.Controllers
             ViewBag.Message = "Form başarıyla iletildi,en kısa zamanda dönüş yapacağız.";
             return View();
         }
+
     }
 }
