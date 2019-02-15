@@ -22,9 +22,51 @@ namespace Wissen.Controllers
         {
             if (ModelState.IsValid)
             {
-                //1000:Mail gönder
-                ViewBag.Message = "Mail başarıyla gönderildi.";
-                return View();
+                bool hasError = false;
+                try
+                {
+                   
+
+
+                    //1000:Mail gönder
+
+                    System.Net.Mail.MailMessage mailMessage = new System.Net.Mail.MailMessage();
+                    mailMessage.From = new System.Net.Mail.MailAddress("tanerakyil@gmail.com", "tano");
+                    mailMessage.Subject = "İletişim Formu: " + model.FirstName + " " + model.LastName;
+                    mailMessage.To.Add("tanerakyil@gmail.com,tanerakyil@gmail.com");
+                    string body;
+                    body = "Ad: " + model.FirstName + "<br />";
+                    body = "Soyad: " + model.LastName + "<br />";
+                    body += "Telefon: " + model.Phone + "<br />";
+                    body += "E-posta: " + model.Email + "<br />";
+
+                    mailMessage.IsBodyHtml = true;
+                    mailMessage.Body = body;
+
+
+                    System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587);
+                    smtp.Credentials = new System.Net.NetworkCredential("tanerakyil@gmail.com", "tanerfb1907");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mailMessage);
+
+                    ViewBag.Message = "Mesajınız gönderildi. Teşekkür ederiz.";
+
+
+                    
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("Error", ex.Message);
+                    hasError = true;
+                }
+
+                if (hasError == false)
+                {
+                    ViewBag.Message = "Mail başarıyla gönderildi.";
+                    return View();
+                }
+
             }
             return View();
         }
