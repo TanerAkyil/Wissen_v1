@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace Wissen
+namespace Wissen.Admin
 {
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -18,7 +18,6 @@ namespace Wissen
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
             var builder = new ContainerBuilder();
 
             // Register your MVC controllers. (MvcApplication is the name of
@@ -38,7 +37,7 @@ namespace Wissen
             // OPTIONAL: Enable property injection into action filters.
             builder.RegisterFilterProvider();
 
-            
+          
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();

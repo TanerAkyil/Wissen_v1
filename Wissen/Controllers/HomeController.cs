@@ -45,7 +45,7 @@ namespace Wissen.Controllers
 
 
                     System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587);
-                    smtp.Credentials = new System.Net.NetworkCredential("tanerakyil@gmail.com", "tanerfb1907");
+                    smtp.Credentials = new System.Net.NetworkCredential("mail", "sifre");
                     smtp.EnableSsl = true;
                     smtp.Send(mailMessage);
 
