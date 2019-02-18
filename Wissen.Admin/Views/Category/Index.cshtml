@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Wissen.Model.Category>
 @{
-    ViewBag.Title = "Test";
+    ViewBag.Title = "Kategoriler";
 }
 
 <h2>Kategoriler</h2>
@@ -10,13 +10,16 @@
         <th>Ad</th>
         <th>Açıklama</th>
         <th>Tarih</th>
+        <th></th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.Name</td>
+            <td><a href="@Url.Action("Edit",new { id = item.Id })">@item.Name</a></td>
             <td>@item.Description</td>
             <td>@item.CreatedAt.ToString("dd.MM.yyyy")</td>
+            <td><a href="@Url.Action("Edit",new { id = item.Id })" class="btn btn-primary btn-sm">Düzenle</a>
+           <a href="@Url.Action("Delete",new { id = item.Id })" class="btn btn-danger btn-sm">Sil</a></td>
         </tr>
     }
 </table>

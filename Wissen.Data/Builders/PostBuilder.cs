@@ -14,7 +14,7 @@ namespace Wissen.Data.Builders
         {
             entity.Property(p => p.Title).IsRequired().HasMaxLength(200);
             entity.Property(p => p.Description).HasMaxLength(2000);
-            entity.HasRequired(p =>p.Category).WithMany(c =>c.Posts).HasForeignKey(p => p.CategoryId);
+            entity.HasOptional(p =>p.Category).WithMany(c =>c.Posts).HasForeignKey(p => p.CategoryId);
         }
     }
 }

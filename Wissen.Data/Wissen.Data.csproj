@@ -60,6 +60,10 @@
     <Compile Include="Migrations\201902150919352_addService.Designer.cs">
       <DependentUpon>201902150919352_addService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902181116309_PostService.cs" />
+    <Compile Include="Migrations\201902181116309_PostService.Designer.cs">
+      <DependentUpon>201902181116309_PostService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +84,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902150919352_addService.resx">
       <DependentUpon>201902150919352_addService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902181116309_PostService.resx">
+      <DependentUpon>201902181116309_PostService.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
