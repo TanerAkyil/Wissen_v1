@@ -11,7 +11,7 @@ namespace Wissen.Data
 {
    public class ApplicationDbContext:DbContext
     {
-        public ApplicationDbContext() : base("DefaultConnection")
+        public ApplicationDbContext() : base("name=DefaultConnection")
         {
 
         }
