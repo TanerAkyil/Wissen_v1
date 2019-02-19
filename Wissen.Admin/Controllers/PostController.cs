@@ -15,8 +15,9 @@ namespace Wissen.Admin.Controllers
         private readonly ICategoryService categoryService;
         public PostController(IPostService postService,ICategoryService categoryService)
         {
-            this.categoryService = categoryService;
+           
             this.postService = postService;
+            this.categoryService = categoryService;
         }
         // GET: Post
         public ActionResult Index()
@@ -43,6 +44,7 @@ namespace Wissen.Admin.Controllers
         }
         public ActionResult Edit(int id)
         {
+            ViewBag.CategoryId = new SelectList(categoryService.GetAll(), "Id", "Name");
             var post = postService.Find(id);
             if (post == null)
             {
@@ -53,6 +55,7 @@ namespace Wissen.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(Post post)
         {
+           
             if (ModelState.IsValid)
             {
                 var model = postService.Find(post.Id);
@@ -62,6 +65,7 @@ namespace Wissen.Admin.Controllers
                 postService.Update(model);
                 return RedirectToAction("Index");
             }
+            ViewBag.CategoryId = new SelectList(categoryService.GetAll(), "Id", "Name", post.CategoryId);
             return View();
         }
         public ActionResult Delete(int id)
